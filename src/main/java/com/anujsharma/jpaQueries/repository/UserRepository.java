@@ -53,7 +53,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
     @Query("SELECT u FROM User u WHERE u.name IS NULL")
     List<User> findUsersWithNoName();
 
-    @Query("SELECT u FROM User u WHERE u.age = (SELECT AVG(u2.age) FROM User u2)")
+    @Query("SELECT u FROM User u WHERE u.age = FUNCTION('ROUND', (SELECT AVG(u2.age) FROM User u2))")
     List<User> findUsersWithAverageAge();
 
 }
